@@ -1,0 +1,21 @@
+{
+    "name": "PHP GodGame training application for Cegeka",
+    "description": "",
+    "keywords": ["Cegeka", "training", "Agile"],
+
+    "require": {
+    },
+
+    "require-dev": {
+        "phpunit/phpunit": "4.0.*"
+    },
+
+    "autoload": {
+        "classmap": [
+            "src/models"
+        ]
+    },
+
+    "minimum-stability": "stable"
+
+}
