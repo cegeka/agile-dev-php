@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Application Test Suite" tests="33" assertions="142" failures="0" errors="0" time="0.406030">
+    <testsuite name="AgeTest" file="/etc/httpd/sites-available/god-game/htdocs/tests/models/AgeTest.php" tests="4" assertions="5" failures="0" errors="0" time="0.063953">
+      <testcase name="testGetDays" class="AgeTest" file="/etc/httpd/sites-available/god-game/htdocs/tests/models/AgeTest.php" line="21" assertions="1" time="0.049830"/>
+      <testcase name="testAddDays" class="AgeTest" file="/etc/httpd/sites-available/god-game/htdocs/tests/models/AgeTest.php" line="32" assertions="1" time="0.004379"/>
+      <testcase name="testAddAge" class="AgeTest" file="/etc/httpd/sites-available/god-game/htdocs/tests/models/AgeTest.php" line="43" assertions="1" time="0.003840"/>
+      <testcase name="testIncreaseAge" class="AgeTest" file="/etc/httpd/sites-available/god-game/htdocs/tests/models/AgeTest.php" line="55" assertions="2" time="0.005904"/>
+    </testsuite>
+    <testsuite name="CellTest" file="/etc/httpd/sites-available/god-game/htdocs/tests/models/CellTest.php" tests="1" assertions="1" failures="0" errors="0" time="0.006300">
+      <testcase name="testRender" class="CellTest" file="/etc/httpd/sites-available/god-game/htdocs/tests/models/CellTest.php" line="19" assertions="1" time="0.006300"/>
+    </testsuite>
+    <testsuite name="GrassTest" file="/etc/httpd/sites-available/god-game/htdocs/tests/models/GrassTest.php" tests="1" assertions="1" failures="0" errors="0" time="0.005990">
+      <testcase name="testRender" class="GrassTest" file="/etc/httpd/sites-available/god-game/htdocs/tests/models/GrassTest.php" line="19" assertions="1" time="0.005990"/>
+    </testsuite>
+    <testsuite name="MatrixTest" file="/etc/httpd/sites-available/god-game/htdocs/tests/models/MatrixTest.php" tests="12" assertions="113" failures="0" errors="0" time="0.197177">
+      <testcase name="testSetCell" class="MatrixTest" file="/etc/httpd/sites-available/god-game/htdocs/tests/models/MatrixTest.php" line="23" assertions="1" time="0.019474"/>
+      <testcase name="testGetCell_throwsExceptionIfPointIsOutsideOfMatrix" class="MatrixTest" file="/etc/httpd/sites-available/god-game/htdocs/tests/models/MatrixTest.php" line="38" assertions="1" time="0.017835"/>
+      <testsuite name="MatrixTest::testGetSpaceCellCount" tests="4" assertions="4" failures="0" errors="0" time="0.046061">
+        <testcase name="testGetSpaceCellCount with data set #0" assertions="1" time="0.007523"/>
+        <testcase name="testGetSpaceCellCount with data set #1" assertions="1" time="0.009045"/>
+        <testcase name="testGetSpaceCellCount with data set #2" assertions="1" time="0.012522"/>
+        <testcase name="testGetSpaceCellCount with data set #3" assertions="1" time="0.016971"/>
+      </testsuite>
+      <testsuite name="MatrixTest::testGetSize" tests="4" assertions="4" failures="0" errors="0" time="0.046769">
+        <testcase name="testGetSize with data set #0" assertions="1" time="0.008358"/>
+        <testcase name="testGetSize with data set #1" assertions="1" time="0.009787"/>
+        <testcase name="testGetSize with data set #2" assertions="1" time="0.012488"/>
+        <testcase name="testGetSize with data set #3" assertions="1" time="0.016136"/>
+      </testsuite>
+      <testcase name="testGetRandomPointInSpace" class="MatrixTest" file="/etc/httpd/sites-available/god-game/htdocs/tests/models/MatrixTest.php" line="92" assertions="100" time="0.046721"/>
+      <testcase name="testGetGrassCells" class="MatrixTest" file="/etc/httpd/sites-available/god-game/htdocs/tests/models/MatrixTest.php" line="108" assertions="3" time="0.020317"/>
+    </testsuite>
+    <testsuite name="PointTest" file="/etc/httpd/sites-available/god-game/htdocs/tests/models/PointTest.php" tests="8" assertions="12" failures="0" errors="0" time="0.039036">
+      <testsuite name="PointTest::testConstruct" tests="4" assertions="8" failures="0" errors="0" time="0.024874">
+        <testcase name="testConstruct with data set #0" assertions="2" time="0.006128"/>
+        <testcase name="testConstruct with data set #1" assertions="2" time="0.005987"/>
+        <testcase name="testConstruct with data set #2" assertions="2" time="0.005964"/>
+        <testcase name="testConstruct with data set #3" assertions="2" time="0.006795"/>
+      </testsuite>
+      <testsuite name="PointTest::testToString" tests="4" assertions="4" failures="0" errors="0" time="0.014161">
+        <testcase name="testToString with data set #0" assertions="1" time="0.003760"/>
+        <testcase name="testToString with data set #1" assertions="1" time="0.003466"/>
+        <testcase name="testToString with data set #2" assertions="1" time="0.003530"/>
+        <testcase name="testToString with data set #3" assertions="1" time="0.003405"/>
+      </testsuite>
+    </testsuite>
+    <testsuite name="WorldTest" file="/etc/httpd/sites-available/god-game/htdocs/tests/models/WorldTest.php" tests="7" assertions="10" failures="0" errors="0" time="0.093574">
+      <testsuite name="WorldTest::testGetSpaceCellCount" tests="4" assertions="4" failures="0" errors="0" time="0.050435">
+        <testcase name="testGetSpaceCellCount with data set #0" assertions="1" time="0.011426"/>
+        <testcase name="testGetSpaceCellCount with data set #1" assertions="1" time="0.008971"/>
+        <testcase name="testGetSpaceCellCount with data set #2" assertions="1" time="0.012597"/>
+        <testcase name="testGetSpaceCellCount with data set #3" assertions="1" time="0.017441"/>
+      </testsuite>
+      <testcase name="testPassDay" class="WorldTest" file="/etc/httpd/sites-available/god-game/htdocs/tests/models/WorldTest.php" line="43" assertions="2" time="0.010197"/>
+      <testcase name="testGrassDoesNotGetAddedOnSixthDay" class="WorldTest" file="/etc/httpd/sites-available/god-game/htdocs/tests/models/WorldTest.php" line="57" assertions="2" time="0.015145"/>
+      <testcase name="testGrassGetsAddedOnSeventhDay" class="WorldTest" file="/etc/httpd/sites-available/god-game/htdocs/tests/models/WorldTest.php" line="73" assertions="2" time="0.017797"/>
+    </testsuite>
+  </testsuite>
+</testsuites>

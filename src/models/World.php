@@ -1,34 +1,17 @@
 <?php
 
 
-class World {
+class World implements Space  {
 
     protected $age;
-
-    protected $size;
 
     protected $content;
 
 
-    public function __construct($size = 15, $age = 0)
+    public function __construct($size = 10, $age = 0)
     {
-        $this->size = $size;
         $this->age = $age;
-        $this->initContent();
-    }
-
-    public function initContent()
-    {
-        $this->content = array();
-        for( $i = 0; $i < $this->size; ++$i ) {
-            $line = array();
-            for( $j = 0; $j < $this->size; ++$j ) {
-                $cell = new Cell();
-                array_push( $line, $cell );
-            }
-
-            array_push( $this->content, $line );
-        }
+        $this->content = new Matrix( $size );
     }
 
     public function getAge()
@@ -36,19 +19,29 @@ class World {
         return $this->age;
     }
 
-    public function getCell($x, $y)
+    public function getSize()
     {
-        return $this->content[ $x ][ $y ];
+        return $this->content->getSize();
     }
 
-    public function setCell($x, $y, Cell $cell)
+    public function getCell(Point $point)
     {
-        $this->content[ $x ][ $y ] = $cell;
+        return $this->content->getCell( $point );
     }
 
-    public function getWorldSize()
+    public function setCell(Point $point, Cell $cell)
     {
-        return $this->size * $this->size;
+        $this->content->setCell( $point, $cell );
+    }
+
+    public function getSpaceCellCount()
+    {
+        return $this->content->getSpaceCellCount();
+    }
+
+    public function getRandomPointInSpace()
+    {
+        return $this->content->getRandomPointInSpace();
     }
 
     public function passDay()
@@ -57,12 +50,12 @@ class World {
         $this->checkEvents();
     }
 
-    public function checkEvents()
+    protected function checkEvents()
     {
         $this->checkEventsOnAgeChange();
     }
 
-    public function checkEventsOnAgeChange()
+    protected function checkEventsOnAgeChange()
     {
         if( $this->age === 7 ) {
             $this->addGrassToWorld();
@@ -71,35 +64,17 @@ class World {
 
     protected function addGrassToWorld()
     {
-       $x = (int) rand(0, $this->size - 1 );
-       $y = (int) rand(0, $this->size - 1 );
-
-        $this->setCell( $x, $y, new Grass() );
+        $this->setCell( $this->getRandomPointInSpace(), new Grass() );
     }
 
-    public function getGrassCells()
+    public function getGrassCount()
     {
-        return $this->findCellsByType('Grass');
+        return count( $this->content->getGrassCells() );
     }
 
-    protected function findCellsByType($type)
+    public function render()
     {
-        if( empty($type) ) {
-            throw new InvalidArgumentException('Type cannot be empty');
-        }
-
-        $results = array();
-        for( $x = 0; $x < $this->size; ++$x ) {
-            for( $y = 0; $y < $this->size; ++$y ) {
-
-                if( get_class( $this->content[ $x ][ $y ] ) === $type ) {
-                    array_push( $results, $this->content[ $x ][ $y ] );
-                }
-
-            }
-        }
-
-        return $results;
+        $this->content->render();
     }
 
 } 

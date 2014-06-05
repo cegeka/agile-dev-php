@@ -3,10 +3,12 @@
 
 interface Space {
 
-    public function setCell(Point $point, Cell $cell);
-
     public function getCell(Point $point);
 
-    public function getSpaceCellsCount();
+    public function setCell(Point $point, Cell $cell);
+
+    public function getSpaceCellCount();
+
+    public function getRandomPointInSpace();
 
 }

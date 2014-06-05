@@ -3,6 +3,7 @@
 
 class AgeTest extends \PHPUnit_Framework_TestCase {
 
+    /** @var Age */
     protected $age;
 
 

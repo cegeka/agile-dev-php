@@ -3,6 +3,7 @@
 
 class PointTest extends \PHPUnit_Framework_TestCase {
 
+    /** @var Point */
     protected $point;
 
 
@@ -15,27 +16,48 @@ class PointTest extends \PHPUnit_Framework_TestCase {
 
 
     /**
+     * @covers Point::__construct()
      * @covers Point::getX()
+     * @covers Point::getY()
+     * @dataProvider constructDataProvider
      */
-    public function testGetX()
+    public function testConstruct($x, $y)
     {
-        $this->fail('Not implemented yet');
+        $point = new Point( $x, $y );
+
+        $this->assertEquals( $x, $point->getX() );
+        $this->assertEquals( $y, $point->getY() );
     }
 
-    /**
-     * @covers Point::getY()
-     */
-    public function testAddDays()
+    public function constructDataProvider()
     {
-        $this->fail('Not implemented yet');
+        return array(
+            array(1, 6),
+            array(5, 2),
+            array(10, 7),
+            array(14, 0)
+        );
     }
 
     /**
      * @covers Point::toString()
+     * @dataProvider toStringDataProvider
      */
-    public function testToString()
+    public function testToString($x, $y, $expectedString)
     {
-        $this->fail('Not implemented yet');
+        $point = new Point( $x, $y );
+
+        $this->assertEquals( $expectedString, $point->toString() );
+    }
+
+    public function toStringDataProvider()
+    {
+        return array(
+            array(1, 6,  '(1,6)'),
+            array(5, 2,  '(5,2)'),
+            array(10, 7, '(10,7)'),
+            array(14, 0, '(14,0)')
+        );
     }
 
 }

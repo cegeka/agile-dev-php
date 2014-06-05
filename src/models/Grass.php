@@ -8,4 +8,9 @@ class Grass extends Cell {
         // ...
     }
 
+    public function render()
+    {
+        return '<div class="cell grass"></div>';
+    }
+
 }

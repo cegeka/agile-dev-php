@@ -3,6 +3,7 @@
 
 class WorldTest extends \PHPUnit_Framework_TestCase {
 
+    /** @var World */
     protected $world;
 
 
@@ -15,17 +16,17 @@ class WorldTest extends \PHPUnit_Framework_TestCase {
 
 
     /**
-     * @covers World::getWorldSize()
-     * @dataProvider worldSizeDataProvider
+     * @covers World::getSpaceCellCount()
+     * @dataProvider spaceCellCountDataProvider
      */
-    public function testGetWorldSize($size, $expectedWorldSize)
+    public function testGetSpaceCellCount($size, $expectedCellCount)
     {
         $world = new World( $size );
 
-        $this->assertEquals( $expectedWorldSize, $world->getWorldSize() );
+        $this->assertEquals( $expectedCellCount, $world->getSpaceCellCount() );
     }
 
-    public function worldSizeDataProvider()
+    public function spaceCellCountDataProvider()
     {
         return array(
             array(1, 1),
@@ -52,16 +53,15 @@ class WorldTest extends \PHPUnit_Framework_TestCase {
      * @covers World::passDay()
      * @covers World::checkEvents()
      * @covers World::checkEventsOnAgeChange()
-     * @covers World::getGrassCells()
-     * @covers World::findCellsByType()
+     * @covers World::getGrassCount()
      */
     public function testGrassDoesNotGetAddedOnSixthDay()
     {
         $world = new World(10, 5);
-        $this->assertCount( 0, $world->getGrassCells() );
+        $this->assertEquals( 0, $world->getGrassCount() );
 
         $world->passDay();
-        $this->assertCount( 0, $world->getGrassCells() );
+        $this->assertEquals( 0, $world->getGrassCount() );
     }
 
     /**
@@ -69,16 +69,15 @@ class WorldTest extends \PHPUnit_Framework_TestCase {
      * @covers World::checkEvents()
      * @covers World::checkEventsOnAgeChange()
      * @covers World::addGrassToWorld()
-     * @covers World::getGrassCells()
-     * @covers World::findCellsByType()
+     * @covers World::getGrassCount()
      */
     public function testGrassGetsAddedOnSeventhDay()
     {
         $world = new World(10, 6);
-        $this->assertCount( 0, $world->getGrassCells() );
+        $this->assertEquals( 0, $world->getGrassCount() );
 
         $world->passDay();
-        $this->assertCount( 1, $world->getGrassCells() );
+        $this->assertEquals( 1, $world->getGrassCount() );
     }
 
 }
