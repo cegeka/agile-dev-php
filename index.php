@@ -3,14 +3,9 @@
     require __DIR__.'/vendor/autoload.php';
     require __DIR__.'/helpers.php';
 
-    echo 'Hello world!';
-
     $world = new World();
-    for( $i = 0; $i < 7; ++$i ) {
-        $world->passDay();
-    }
-
-
+    $world->loadFromFile();
+    $world->passDay();
 ?>
 
 <html>
@@ -40,8 +35,14 @@
 
     </head>
     <body>
+        <header>
+            <p>
+                <b>World age</b>: <?php echo $world->getAge(); ?>
+            </p>
+        </header>
         <div class="world">
             <?php $world->render(); ?>
         </div>
+        <?php $world->saveToFile(); ?>
     </body>
 </html>

@@ -10,6 +10,8 @@ class GrassTest extends \PHPUnit_Framework_TestCase {
     public function setUp()
     {
         parent::setUp();
+
+        $this->grass = new Grass( 10 );
     }
 
 
@@ -19,8 +21,16 @@ class GrassTest extends \PHPUnit_Framework_TestCase {
      */
     public function testRender()
     {
-        $cell = new Grass();
-        $this->assertEquals( '<div class="cell grass"></div>', $cell->render() );
+        $grass = new Grass();
+        $this->assertEquals( '<div class="cell grass"></div>', $grass->render() );
+    }
+
+    /**
+     * @covers Grass::getAge()
+     */
+    public function testGetAge()
+    {
+        $this->assertEquals( 10, $this->grass->getAge()->getDays() );
     }
 
 }

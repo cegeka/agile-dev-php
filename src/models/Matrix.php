@@ -45,7 +45,7 @@ class Matrix implements Space {
     public function setCell(Point $point, Cell $cell)
     {
         if( $this->isValidPoint( $point ) ) {
-            return $this->content[ $point->getX() ][ $point->getY() ] = $cell;
+            $this->content[ $point->getX() ][ $point->getY() ] = $cell;
         }
     }
 
@@ -61,16 +61,12 @@ class Matrix implements Space {
 
     protected function findCellsByType($type)
     {
-        if( empty($type) ) {
-            throw new InvalidArgumentException('Type cannot be empty');
-        }
-
         $results = array();
         for( $x = 0; $x < $this->size; ++$x ) {
             for( $y = 0; $y < $this->size; ++$y ) {
 
                 if( get_class( $this->content[ $x ][ $y ] ) === $type ) {
-                    array_push( $results, $this->content[ $x ][ $y ] );
+                    array_push( $results, new Point( $x, $y ) );
                 }
 
             }
@@ -87,13 +83,17 @@ class Matrix implements Space {
         return new Point( $x, $y );
     }
 
-    protected function isValidPoint(Point $point)
+    public function isValidPoint(Point $point)
     {
-        if( !is_null($point) && $point->getX() < $this->size && $point->getY() < $this->size ) {
-            return true;
+        if( $point->getX() > $this->size-1 || $point->getY() > $this->size-1 ) {
+            return false;
         }
 
-        throw new InvalidArgumentException( 'Point is invalid: '. $point->toString() );
+        if( $point->getX() < 0 || $point->getY() < 0 ) {
+            return false;
+        }
+
+        return true;
     }
 
     public function render()

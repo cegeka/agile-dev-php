@@ -3,10 +3,20 @@
 
 class Grass extends Cell {
 
-    public function __construct()
+    protected $age;
+
+
+    public function __construct($age = 0)
     {
-        // ...
+        $this->age = new Age( $age );
     }
+
+
+    public function getAge()
+    {
+        return $this->age;
+    }
+
 
     public function render()
     {

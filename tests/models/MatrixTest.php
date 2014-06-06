@@ -33,11 +33,10 @@ class MatrixTest extends \PHPUnit_Framework_TestCase {
     /**
      * @covers Matrix::getCell()
      * @covers Matrix::isValidPoint()
-     * @expectedException InvalidArgumentException
      */
     public function testGetCell_throwsExceptionIfPointIsOutsideOfMatrix()
     {
-        $this->matrix->getCell( new Point( 15, 9 ) );
+        $this->assertNull( $this->matrix->getCell( new Point( 15, 9 ) ) );
     }
 
     /**
@@ -111,11 +110,34 @@ class MatrixTest extends \PHPUnit_Framework_TestCase {
 
         $grassCell1 = new Grass();
         $this->matrix->setCell( new Point( 5, 3 ), $grassCell1);
-        $this->assertEquals( array( $grassCell1 ), $this->matrix->getGrassCells() );
+        $grassCells = $this->matrix->getGrassCells();
+        $this->assertCount( 1, $grassCells);
+        $this->assertEquals( 5, $grassCells[0]->getX() );
+        $this->assertEquals( 3, $grassCells[0]->getY() );
 
         $grassCell2 = new Grass();
         $this->matrix->setCell( new Point( 9, 6 ), $grassCell2);
-        $this->assertEquals( array( $grassCell1, $grassCell2 ), $this->matrix->getGrassCells() );
+        $grassCells = $this->matrix->getGrassCells();
+        $this->assertCount( 2, $grassCells);
+        $this->assertEquals( 5, $grassCells[0]->getX() );
+        $this->assertEquals( 3, $grassCells[0]->getY() );
+        $this->assertEquals( 9, $grassCells[1]->getX() );
+        $this->assertEquals( 6, $grassCells[1]->getY() );
+    }
+
+    /**
+     * @covers Matrix::isValidPoint()
+     */
+    public function testIsValidPoint()
+    {
+        $this->assertTrue( $this->matrix->isValidPoint( new Point(0,0 ) ) );
+        $this->assertTrue( $this->matrix->isValidPoint( new Point(2,9 ) ) );
+        $this->assertTrue( $this->matrix->isValidPoint( new Point(7,6 ) ) );
+        $this->assertTrue( $this->matrix->isValidPoint( new Point(9,9 ) ) );
+        $this->assertFalse( $this->matrix->isValidPoint( new Point(9,10 ) ) );
+        $this->assertFalse( $this->matrix->isValidPoint( new Point(-1,9 ) ) );
+        $this->assertFalse( $this->matrix->isValidPoint( new Point(-1,10 ) ) );
+        $this->assertFalse( $this->matrix->isValidPoint( new Point(6,19 ) ) );
     }
 
 }

@@ -3,6 +3,9 @@
 
 class Cell {
 
+    use Ageable;
+
+
     public function __construct()
     {
         // ...

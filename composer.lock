@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "7db55f83ff29123d326836d7b3422648",
+    "hash": "b4509751fa723521fd8fc19f9b201076",
     "packages": [
 
     ],
@@ -398,16 +398,16 @@
         },
         {
             "name": "phpunit/phpunit-mock-objects",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "da0eb04d8ee95ec2898187e407e519c118d3d27c"
+                "reference": "d87a195502b5e139a665c7b2f962381282878aac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/da0eb04d8ee95ec2898187e407e519c118d3d27c",
-                "reference": "da0eb04d8ee95ec2898187e407e519c118d3d27c",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/d87a195502b5e139a665c7b2f962381282878aac",
+                "reference": "d87a195502b5e139a665c7b2f962381282878aac",
                 "shasum": ""
             },
             "require": {
@@ -451,7 +451,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2014-05-02 07:04:11"
+            "time": "2014-05-26 09:55:57"
         },
         {
             "name": "sebastian/comparator",
