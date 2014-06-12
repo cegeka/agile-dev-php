@@ -3,24 +3,32 @@
 
 class Grass extends Cell {
 
-    protected $age;
-
-
-    public function __construct($age = 0)
+    public function __construct(Point $location, $age = 0)
     {
-        $this->age = new Age( $age );
+        parent::__construct($location, $age);
     }
 
 
-    public function getAge()
+    protected function checkEvents()
     {
-        return $this->age;
+        if( $this->getDaysOld() == 22 ) {
+            EventHandler::killGrass( $this->location );
+        }
+
+        if( $this->getDaysOld() % 7 === 0 ) {
+            EventHandler::spreadGrass( $this->location );
+        }
     }
 
 
-    public function render()
+    public function render(Animal $animal = null)
     {
-        return '<div class="cell grass"></div>';
+        $content = '';
+        if( !is_null($animal) ) {
+            $content = $animal->render();
+        }
+
+        return '<div class="cell grass">'. $content .'</div>';
     }
 
 }

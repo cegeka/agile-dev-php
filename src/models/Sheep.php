@@ -8,4 +8,10 @@ class Sheep extends Animal {
         parent::__construct($location, new Age( $daysOld) );
     }
 
+
+    public function render()
+    {
+        return '<img src="images/sheep.png" class="animal" />';
+    }
+
 }

@@ -17,14 +17,14 @@ class Matrix implements Space {
     public function initContent()
     {
         $this->content = array();
-        for( $i = 0; $i < $this->size; ++$i ) {
-            $line = array();
-            for( $j = 0; $j < $this->size; ++$j ) {
-                $cell = new Cell();
-                array_push( $line, $cell );
+        for( $x = 0; $x < $this->size; ++$x ) {
+            $row = array();
+            for( $y = 0; $y < $this->size; ++$y ) {
+                $cell = new Cell( new Point( $x, $y ) );
+                array_push( $row, $cell );
             }
 
-            array_push( $this->content, $line );
+            array_push( $this->content, $row );
         }
     }
 
@@ -42,9 +42,10 @@ class Matrix implements Space {
         return null;
     }
 
-    public function setCell(Point $point, Cell $cell)
+    public function setCell(Cell $cell)
     {
-        if( $this->isValidPoint( $point ) ) {
+        $point = $cell->getLocation();
+        if( $this->isValidPoint($point) ) {
             $this->content[ $point->getX() ][ $point->getY() ] = $cell;
         }
     }
@@ -94,6 +95,17 @@ class Matrix implements Space {
         }
 
         return true;
+    }
+
+    public function update()
+    {
+        for( $x = 0; $x < $this->size; ++$x ) {
+            for( $y = 0; $y < $this->size; ++$y ) {
+
+                $this->content[ $x ][ $y ]->passDay();
+
+            }
+        }
     }
 
     public function render()

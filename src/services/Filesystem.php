@@ -28,7 +28,6 @@ class Filesystem {
 
     public function delete($file)
     {
-        $life = '/etc/httpd/sites-available/god-game/htdocs/saves/world.json';
         if( file_exists($file) ) {
             unlink( $file );
         }

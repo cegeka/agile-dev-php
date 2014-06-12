@@ -13,4 +13,15 @@ trait Ageable {
         return $this->age->increaseAge();
     }
 
+    public function passDay()
+    {
+        $this->increaseAge();
+        $this->checkEvents();
+    }
+
+    protected function checkEvents()
+    {
+        return;
+    }
+
 }

@@ -7,7 +7,7 @@ class World implements Space  {
 
 
     protected $age;
-    protected $content;
+    protected $grid;
 
     protected $sheepCollection;
     protected $wolfCollection;
@@ -17,8 +17,8 @@ class World implements Space  {
 
     public function __construct($size = 10, $age = 0)
     {
-        $this->age = $age;
-        $this->content = new Matrix( $size );
+        $this->age = new Age( $age );
+        $this->grid = new Matrix( $size );
 
         $this->sheepCollection = new AnimalCollection();
         $this->wolfCollection = new AnimalCollection();
@@ -26,133 +26,94 @@ class World implements Space  {
         $this->filesystem = new Filesystem();
     }
 
-    public function getAge()
-    {
-        return $this->age;
-    }
-
-    public function getSize()
-    {
-        return $this->content->getSize();
-    }
-
-    public function getCell(Point $point)
-    {
-        return $this->content->getCell( $point );
-    }
-
-    public function setCell(Point $point, Cell $cell)
-    {
-        $this->content->setCell( $point, $cell );
-    }
-
-    public function getSpaceCellCount()
-    {
-        return $this->content->getSpaceCellCount();
-    }
-
-    public function getRandomPointInSpace()
-    {
-        return $this->content->getRandomPointInSpace();
-    }
 
     public function passDay()
     {
-        $this->age += 1;
+        $this->increaseAge();
+        $this->checkEvents();
 
-        foreach( $this->content->getGrassCells() as $point ) {
-            $this->content->getCell( $point )->increaseAge();
-        }
+        $this->grid->update();
 
         $this->sheepCollection->increaseAnimalAge();
         $this->wolfCollection->increaseAnimalAge();
 
-        $this->checkEvents();
     }
 
     protected function checkEvents()
     {
-        $this->checkEventsOnAgeChange();
-    }
-
-    protected function checkEventsOnAgeChange()
-    {
-        if( $this->age === 7 ) {
-            $this->addGrassToWorld();
-            return;
-        }
-        if( $this->age === 19 ) {
-            $this->addSheepToWorld();
-            return;
+        if( $this->getDaysOld() === 7 ) {
+            EventHandler::spawnGrass();
         }
 
-        foreach( $this->content->getGrassCells() as $point ) {
-            $daysOld = $this->content->getCell($point)->getDaysOld();
-            if( $daysOld == 22 ) {
-                $this->content->setCell( $point, new Cell() );
-                continue;
-            }
-
-            if( $daysOld % 7 === 0 ) {
-                $newPoint = new Point($point->getX() + $this->getOffset(), $point->getY() + $this->getOffset());
-                if( $this->content->isValidPoint( $point) && get_class( $this->getCell( $newPoint ) ) == 'Cell' ) {
-                    $this->setCell( $newPoint, new Grass() );
-                }
-            }
+        if( $this->getDaysOld() === 19 ) {
+            EventHandler::spawnSheep();
         }
     }
 
     protected function getOffset()
     {
-        return (int)rand(-1, 1);
+        return (int) rand(-1, 1);
     }
 
-    protected function addGrassToWorld()
+    public function addGrass(Point $location)
     {
-        $this->setCell( $this->getRandomPointInSpace(), new Grass() );
+        $this->setCell( new Grass( $location ) );
     }
 
-    protected function addSheepToWorld()
+    public function addSheep(Point $location)
     {
         $this->sheepCollection->addItem(
-            new Sheep( $this->getRandomPointInSpace() )
+            new Sheep( $location )
         );
     }
 
     public function getGrassCount()
     {
-        return count( $this->content->getGrassCells() );
+        return count( $this->grid->getGrassCells() );
+    }
+
+    public function getAnimalAt(Point $point)
+    {
+        $animal = $this->sheepCollection->getAnimalAt( $point );
+        if( is_null($animal) ) {
+            $animal = $this->wolfCollection->getAnimalAt( $point );
+        }
+
+        return $animal;
     }
 
     public function render()
     {
-        $this->content->render();
+        for( $x = 0; $x < $this->grid->getSize(); ++$x ) {
+            for( $y = 0; $y < $this->grid->getSize(); ++$y ) {
+                $point = new Point($x, $y);
+                echo $this->getCell($point)->render( $this->getAnimalAt( $point ) );
+            }
+        }
     }
 
     public function saveToFile($file = 'world.json', $overrideExisting = true)
     {
-        $filename = __DIR__ . '/../../saves/' . $file;
-        if( $overrideExisting ) {
-            $this->filesystem->delete( $filename );
-        }
-
         $data = new StdClass();
         $data->world = new StdClass();
-        $data->world->age = $this->age;
+        $data->world->age = $this->getDaysOld();
         $data->world->size = $this->getSize();
         $data->world->grass = array();
 
-        $grassCells = $this->content->getGrassCells();
+        $grassCells = $this->grid->getGrassCells();
         foreach( $grassCells as $grassCell ) {
             $grass = new StdClass();
             $grass->x = $grassCell->getX();
             $grass->y = $grassCell->getY();
-            $grass->age = $this->content->getCell( $grassCell )->getDaysOld();
+            $grass->age = $this->grid->getCell( $grassCell )->getDaysOld();
 
             array_push( $data->world->grass, $grass );
         }
 
-        $this->filesystem->write( $filename, $data );
+        $data->world->sheep = $this->sheepCollection->toJson();
+        $data->world->wolves = $this->wolfCollection->toJson();
+
+        $this->filesystem->write( __DIR__ . '/../../saves/' . $file, $data, $overrideExisting );
     }
 
     public function loadFromFile($file = 'world.json')
@@ -160,15 +121,70 @@ class World implements Space  {
         try {
             $data = $this->filesystem->read( __DIR__ . '/../../saves/' . $file );
 
-            $this->age = $data->world->age;
-            $this->content = new Matrix( $data->world->size );
+            $this->age = new Age( $data->world->age );
+            $this->grid = new Matrix( $data->world->size );
 
             foreach( $data->world->grass as $grass ) {
-                $this->setCell( new Point( $grass->x, $grass->y ), new Grass( $grass->age ) );
+                $point = new Point($grass->x, $grass->y);
+                $this->setCell( new Grass( $point, $grass->age ) );
+            }
+
+            foreach( $data->world->sheep as $sheep ) {
+                $this->sheepCollection->addItem(
+                    new Sheep(
+                        new Point( $sheep->x, $sheep->y ),
+                        $sheep->age
+                    )
+                );
+            }
+
+            foreach( $data->world->wolves as $wolf ) {
+                $this->sheepCollection->addItem(
+                    new Sheep(
+                        new Point( $wolf->x, $wolf->y ),
+                        $wolf->age
+                    )
+                );
             }
         } catch( Exception $e ) {
             // ...
         }
+    }
+
+
+    public function getAge()
+    {
+        return $this->age;
+    }
+
+    public function getGrid()
+    {
+        return $this->grid;
+    }
+
+    public function getSize()
+    {
+        return $this->grid->getSize();
+    }
+
+    public function getCell(Point $point)
+    {
+        return $this->grid->getCell( $point );
+    }
+
+    public function setCell(Cell $cell)
+    {
+        $this->grid->setCell( $cell );
+    }
+
+    public function getSpaceCellCount()
+    {
+        return $this->grid->getSpaceCellCount();
+    }
+
+    public function getRandomPointInSpace()
+    {
+        return $this->grid->getRandomPointInSpace();
     }
 
 }

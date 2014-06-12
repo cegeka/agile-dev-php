@@ -4,6 +4,7 @@
     require __DIR__.'/helpers.php';
 
     $world = new World();
+    $eventHandler = new EventHandler( $world );
     $world->loadFromFile();
     $world->passDay();
 ?>
@@ -18,8 +19,6 @@
                 background-size: 100%;
                 float: left;
                 margin: 0 2px 2px 0;
-                text-align: center;
-                padding-top: 20px;
                 -webkit-box-sizing: border-box;
                 box-sizing: border-box;
             }
@@ -31,13 +30,19 @@
             div .grass {
                 background-image:url('images/grass.png');
             }
+
+            .animal {
+                width: 40px;
+                height: 40px;
+                padding: 5px;
+            }
         </style>
 
     </head>
     <body>
         <header>
             <p>
-                <b>World age</b>: <?php echo $world->getAge(); ?>
+                <b>World age</b>: <?php echo $world->getDaysOld(); ?>
             </p>
         </header>
         <div class="world">

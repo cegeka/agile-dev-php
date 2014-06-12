@@ -1,7 +1,7 @@
 <?php
 
 
-class Animal {
+abstract class Animal {
 
     use Ageable;
     use Locationable;
@@ -24,5 +24,7 @@ class Animal {
     {
         return $this->location;
     }
+
+    public abstract function render();
 
 }

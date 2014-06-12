@@ -53,4 +53,20 @@ class AnimalCollection {
         return $closest;
     }
 
+    public function toJson()
+    {
+        $results = array();
+
+        foreach( $this->animals as $animal ) {
+            $entry = new StdClass();
+            $entry->x = $animal->getLocation()->getX();
+            $entry->y = $animal->getLocation()->getY();
+            $entry->age = $animal->getDaysOld();
+
+            array_push( $results, $entry );
+        }
+
+        return $results;
+    }
+
 }
