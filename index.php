@@ -5,8 +5,15 @@
 
     $world = new World();
     $eventHandler = new EventHandler( $world );
+
+    if( isset( $_GET['restart_world'] ) && $_GET['restart_world'] == 'true' ) {
+        $world->restart();
+    }
     $world->loadFromFile();
-    $world->passDay();
+
+    if( isset( $_GET['pass_day'] ) && $_GET['pass_day'] == 'true' ) {
+        $world->passDay();
+    }
 ?>
 
 <html>
@@ -41,6 +48,10 @@
     </head>
     <body>
         <header>
+            <div class="actions">
+                <a href="index.php?pass_day=true">Pass day</a>
+                <a href="index.php?restart_world=true">Restart world</a>
+            </div>
             <p>
                 <b>World age</b>: <?php echo $world->getDaysOld(); ?>
             </p>

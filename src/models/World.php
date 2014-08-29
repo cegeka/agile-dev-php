@@ -117,6 +117,11 @@ class World implements Space  {
         }
     }
 
+    public function restart($file = 'world.json')
+    {
+        $this->filesystem->delete(__DIR__ . '/../../saves/' . $file);
+    }
+
     public function saveToFile($file = 'world.json', $overrideExisting = true)
     {
         $data = new StdClass();
