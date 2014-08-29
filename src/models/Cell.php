@@ -8,4 +8,12 @@ class Cell {
         // ...
     }
 
+
+    public function render()
+    {
+        $content = '';
+
+        return '<div class="cell">'. $content .'</div>';
+    }
+
 }

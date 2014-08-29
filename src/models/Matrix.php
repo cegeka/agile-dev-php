@@ -14,43 +14,49 @@ class Matrix {
         $this->initContent();
     }
 
+
     public function initContent()
     {
         $this->content = array();
-        for( $i = 0; $i < $this->size; ++$i ) {
-            $line = array();
-            for( $j = 0; $j < $this->size; ++$j ) {
-                $cell = new Cell();
-                array_push( $line, $cell );
+        for( $x = 0; $x < $this->size; ++$x ) {
+            $row = array();
+            for( $y = 0; $y < $this->size; ++$y ) {
+                $cell = new Cell( new Point( $x, $y ) );
+                array_push( $row, $cell );
             }
 
-            array_push( $this->content, $line );
+            array_push( $this->content, $row );
         }
+    }
+
+    public function getGrassCells()
+    {
+        return array();
+    }
+
+    public function render()
+    {
+        foreach( $this->content as $row ) {
+            foreach( $row as $cell ) {
+                echo $cell->render();
+            }
+        }
+    }
+
+    public function getSize()
+    {
+        return $this->size;
     }
 
     public function getCell(Point $point)
     {
-        if( $this->isValidPoint( $point ) ) {
-            return $this->content[ $point->getX() ][ $this->getY() ];
-        }
-
-        return null;
+        return $this->content[ $point->getX() ][ $point->getY() ];
     }
 
-    public function setCell(Point $point, Cell $cell)
+    public function setCell(Cell $cell)
     {
-        if( $this->isValidPoint( $point ) ) {
-            return $this->content[ $point->getX() ][ $this->getY() ] = $cell;
-        }
-    }
-
-    protected function isValidPoint(Point $point)
-    {
-        if( is_null($point) && $point->getX() < $this->size && $point->getY() < $this->size ) {
-            return true;
-        }
-
-        throw new InvalidArgumentException( 'Point is invalid: '. $point->toString() );
+        $point = $cell->getLocation();
+        $this->content[ $point->getX() ][ $point->getY() ] = $cell;
     }
 
 } 
