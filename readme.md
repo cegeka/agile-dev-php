@@ -20,6 +20,55 @@ also suggested to switch pair after every exercise in order to maximize the spre
 
 
 
+# Unit tests
+
+All unit tests are located in the tests/ directory in your home folder. You can structure them in any way you want,
+although it is preferred if the directory structure matches the structure of the src/ directory for readability.
+
+
+## Running unit tests
+
+In order to run the tests, you will need to download and install PHPUnit and it's assorted packages. In case you use
+composer to download the dependencies for this project (which is highly recommended), these packages will be
+downloaded for you automatically and saved in the vendor/bin directory.
+
+In order to run the unit tests, open a new commandline terminal and navigate to the home directory of your project.
+Once there, the unit tests can be run using the following command:
+
+    vendor/bin/phpunit
+
+PHPUnit will automatically detect and load the configuration which is specified in the ``phpunit.xml`` file in your
+root directory. If you want to run one file individually, you can do so by appending the name of the file (or
+directory) to the command given above:
+
+    vendor/bin/phpunit tests/Model
+    vendor/bin/phpunit tests/Model/AgeTest.php
+
+
+## Code coverage
+
+One of many features of PHPUnit is the ability of generate a report based on the unit tests that have been run on the
+codebase of your application. These reports contain a lot of information regarding your application and can be used
+very extensively in order to improve testability and code quality within your application in general.
+
+Code coverage reports come in many shapes and forms (XML, test), but the most useful to us is the HTML format. In order
+to generate the HTML code coverage report for your application, you can use the following command:
+
+    vendor/bin/phpunit --coverage-html logs/coverage/
+
+This will execute PHPUnit as it did in the previous example, but it will also generate the HTML coverage report and
+store it in the logs/coverage/ directory. Once generated, you can consult the report there by opening the index.html
+file in the specified directory.
+
+
+## Note
+
+PHPUnit Code Coverage uses xdebug in the back in order to analyse which lines of code have been used in the application.
+In order to run code coverage, xdebug will have to be installed on your system. If this is not the case, PHPUnit will
+still run as normal, however no code coverage reports will be generated.
+
+
+
 # Exercises
 
 While completing the exercises, the following rules must be respected at all times:
