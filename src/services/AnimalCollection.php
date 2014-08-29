@@ -5,28 +5,34 @@ class AnimalCollection {
 
     protected $animals;
 
+
     public function __construct()
     {
         $this->animals = array();
     }
 
 
-    public function addItem(Animal $item)
+    public function addAnimal(Animal $animal)
     {
-        array_push( $this->animals, $item );
+        array_push( $this->animals, $animal );
+    }
+
+    public function removeAnimal(Animal $animal)
+    {
+        foreach( $this->animals as $key => $entry ) {
+            if( $animal == $entry ) {
+                unset( $this->animals[ $key ] );
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function increaseAnimalAge()
     {
         foreach( $this->animals as $animal ) {
-            $animal->increaseAge();
-        }
-    }
-
-    public function moveAnimals()
-    {
-        foreach( $this->animals as $animal ) {
-            EventHandler::moveAnimal( $animal );
+            $animal->passDay();
         }
     }
 
@@ -79,7 +85,7 @@ class AnimalCollection {
     public function fromJson($animals, $animalType)
     {
         foreach( $animals as $animal ) {
-            $this->addItem(
+            $this->addAnimal(
                 new $animalType(
                     new Point( $animal->x, $animal->y ),
                     $animal->age

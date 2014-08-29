@@ -27,6 +27,17 @@ class World implements Space  {
     }
 
 
+    public function getSheep()
+    {
+        return $this->sheepCollection;
+    }
+
+    public function getWolves()
+    {
+        return $this->wolfCollection;
+    }
+
+
     public function passDay()
     {
         $this->increaseAge();
@@ -36,10 +47,6 @@ class World implements Space  {
 
         $this->sheepCollection->increaseAnimalAge();
         $this->wolfCollection->increaseAnimalAge();
-
-        $this->sheepCollection->moveAnimals();
-        $this->wolfCollection->moveAnimals();
-
     }
 
     protected function checkEvents()
@@ -60,7 +67,7 @@ class World implements Space  {
 
     public function addSheep(Point $location)
     {
-        $this->sheepCollection->addItem(
+        $this->sheepCollection->addAnimal(
             new Sheep( $location )
         );
     }

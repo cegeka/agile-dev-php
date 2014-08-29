@@ -45,4 +45,10 @@ class EventHandler {
         $event->run();
     }
 
+    public static function killAnimal(Animal $animal)
+    {
+        $event = new KillAnimalEvent( self::$world, $animal );
+        $event->run();
+    }
+
 }

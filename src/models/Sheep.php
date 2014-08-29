@@ -14,4 +14,15 @@ class Sheep extends Animal {
         return '<img src="images/sheep.png" class="animal" />';
     }
 
+
+    protected function checkEvents()
+    {
+        if( $this->getDaysOld() === 29 ) {
+            EventHandler::killAnimal( $this );
+            return;
+        }
+
+        EventHandler::moveAnimal( $this );
+    }
+
 }
