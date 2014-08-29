@@ -50,11 +50,6 @@ class World implements Space  {
         }
     }
 
-    protected function getOffset()
-    {
-        return (int) rand(-1, 1);
-    }
-
     public function addGrass(Point $location)
     {
         $this->setCell( new Grass( $location ) );
@@ -129,23 +124,8 @@ class World implements Space  {
                 $this->setCell( new Grass( $point, $grass->age ) );
             }
 
-            foreach( $data->world->sheep as $sheep ) {
-                $this->sheepCollection->addItem(
-                    new Sheep(
-                        new Point( $sheep->x, $sheep->y ),
-                        $sheep->age
-                    )
-                );
-            }
-
-            foreach( $data->world->wolves as $wolf ) {
-                $this->sheepCollection->addItem(
-                    new Sheep(
-                        new Point( $wolf->x, $wolf->y ),
-                        $wolf->age
-                    )
-                );
-            }
+            $this->sheepCollection->fromJson( $data->world->sheep, 'Sheep' );
+//            $this->sheepCollection->fromJson( $data->world->wolves, 'Wolf' );
         } catch( Exception $e ) {
             // ...
         }

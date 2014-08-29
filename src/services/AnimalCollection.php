@@ -69,4 +69,16 @@ class AnimalCollection {
         return $results;
     }
 
+    public function fromJson($animals, $animalType)
+    {
+        foreach( $animals as $animal ) {
+            $this->addItem(
+                new $animalType(
+                    new Point( $animal->x, $animal->y ),
+                    $animal->age
+                )
+            );
+        }
+    }
+
 }
