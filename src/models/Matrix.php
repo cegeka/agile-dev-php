@@ -84,6 +84,18 @@ class Matrix implements Space {
         return new Point( $x, $y );
     }
 
+    public function getLocationNearTo(Point $location, $offset, $allowIllegal = false)
+    {
+        do {
+            $xOffset = (int) rand(-$offset, $offset );
+            $yOffset = (int) rand(-$offset, $offset );
+
+            $point = new Point( $location->getX() + $xOffset , $location->getY() + $yOffset );
+        } while( !$allowIllegal && !$this->isValidPoint( $point ) );
+
+        return $point;
+    }
+
     public function isValidPoint(Point $point)
     {
         if( $point->getX() > $this->size-1 || $point->getY() > $this->size-1 ) {

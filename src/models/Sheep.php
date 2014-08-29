@@ -17,6 +17,11 @@ class Sheep extends Animal {
 
     protected function checkEvents()
     {
+        if( $this->getDaysOld() === 14 ) {
+            EventHandler::giveBirth( $this );
+            return;
+        }
+
         if( $this->getDaysOld() === 29 ) {
             EventHandler::killAnimal( $this );
             return;

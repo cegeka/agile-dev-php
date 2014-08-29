@@ -98,6 +98,15 @@ class World implements Space  {
         return $animal;
     }
 
+    public function getLocationNearTo(Point $location, $offset, $allowIllegal = false, $requireEmpty = true)
+    {
+        do {
+            $point = $this->grid->getLocationNearTo($location, $offset, $allowIllegal);
+        } while( $requireEmpty && !is_null($this->getAnimalAt($point) ) );
+
+        return $point;
+    }
+
     public function render()
     {
         for( $x = 0; $x < $this->grid->getSize(); ++$x ) {
