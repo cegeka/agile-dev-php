@@ -1,7 +1,15 @@
 <?php
 
 
-function dd($object)
+function dd($args, $callback = '')
 {
-    die(var_dump( $object ));
+    if( $callback instanceof Closure ) {
+        foreach( $args as $arg ) {
+            call_user_func( $callback, $arg );
+        }
+    } else {
+        var_dump( $args );
+    }
+
+    die();
 }
