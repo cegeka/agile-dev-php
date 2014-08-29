@@ -3,11 +3,17 @@
 
 class GiveBirthEvent extends Event {
 
+    protected $world;
+
+    protected $animal;
+
+
     public function __construct(World $world, Animal $animal)
     {
         $this->world = $world;
         $this->animal = $animal;
     }
+
 
     public function run()
     {

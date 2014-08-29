@@ -17,15 +17,7 @@ class MoveAnimalEvent extends Event {
 
     public function run()
     {
-        $newPoint = new Point( $this->animal->getLocation()->getX() + $this->getOffset(), $this->animal->getLocation()->getY() + $this->getOffset() );
-        if( $this->world->getGrid()->isValidPoint( $newPoint ) && get_class( $this->world->getCell( $newPoint ) ) == 'Cell' ) {
-            $this->animal->moveTo( $newPoint );
-        }
-    }
-
-    protected function getOffset()
-    {
-        return (int) rand(-1, 1);
+        $this->animal->moveTo( $this->world->getLocationNearTo( $this->animal->getLocation(), 1) );
     }
 
 }
