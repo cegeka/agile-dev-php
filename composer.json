@@ -11,9 +11,7 @@
     },
 
     "autoload": {
-        "classmap": [
-            "src/models"
-        ]
+        "psr-4": {"Godgame\\": "src/"}
     },
 
     "minimum-stability": "stable"

@@ -1,5 +1,7 @@
-<?php
+<?php namespace Godgame\Services;
 
+
+use InvalidArgumentException;
 
 class Filesystem {
 

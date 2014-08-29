@@ -1,5 +1,10 @@
-<?php
+<?php namespace Godgame\Models;
 
+
+use StdClass;
+use Exception;
+
+use Godgame\Services\Filesystem;
 
 class World {
 

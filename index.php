@@ -4,7 +4,7 @@
     require __DIR__.'/helpers.php';
 
 
-    $world = new World();
+    $world = new \Godgame\Models\World();
     $world->loadFromFile();
 ?>
 

@@ -1,4 +1,4 @@
-<?php
+<?php namespace Godgame\Models;
 
 
 class Cell {
@@ -11,9 +11,7 @@ class Cell {
 
     public function render()
     {
-        $content = '';
-
-        return '<div class="cell">'. $content .'</div>';
+        return '<div class="cell"></div>';
     }
 
 }

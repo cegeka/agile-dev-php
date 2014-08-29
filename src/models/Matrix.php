@@ -1,4 +1,4 @@
-<?php
+<?php namespace Godgame\Models;
 
 
 class Matrix {
