@@ -18,7 +18,7 @@ class MatrixTest extends \PHPUnit_Framework_TestCase {
 
 
     /**
-     * @covers Matrix::getCell()
+     * @covers Godgame\Models\Matrix::getCell()
      */
     public function testGetCell()
     {
@@ -29,7 +29,7 @@ class MatrixTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Matrix::getCell()
+     * @covers Godgame\Models\Matrix::getCell()
      * @expectedException InvalidArgumentException
      */
     public function testGetCell_throwsExceptionIfPointIsOutsideOfMatrix()

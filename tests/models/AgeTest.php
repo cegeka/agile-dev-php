@@ -17,8 +17,8 @@ class AgeTest extends \PHPUnit_Framework_TestCase {
 
 
     /**
-     * @covers Age::__construct()
-     * @covers Age::getDays()
+     * @covers Godgame\Models\Age::__construct()
+     * @covers Godgame\Models\Age::getDays()
      */
     public function testGetDays()
     {
@@ -28,8 +28,8 @@ class AgeTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Age::addDays()
-     * @covers Age::getDays()
+     * @covers Godgame\Models\Age::addDays()
+     * @covers Godgame\Models\Age::getDays()
      */
     public function testAddDays()
     {
@@ -39,8 +39,8 @@ class AgeTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Age::addAge()
-     * @covers Age::getDays()
+     * @covers Godgame\Models\Age::addAge()
+     * @covers Godgame\Models\Age::getDays()
      */
     public function testAddAge()
     {
@@ -51,8 +51,8 @@ class AgeTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Age::increaseAge()
-     * @covers Age::getDays()
+     * @covers Godgame\Models\Age::increaseAge()
+     * @covers Godgame\Models\Age::getDays()
      */
     public function testIncreaseAge()
     {

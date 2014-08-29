@@ -17,7 +17,7 @@ class PointTest extends \PHPUnit_Framework_TestCase {
 
 
     /**
-     * @covers Point::getX()
+     * @covers Godgame\Models\Point::getX()
      */
     public function testGetX()
     {
@@ -25,7 +25,7 @@ class PointTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Point::getY()
+     * @covers Godgame\Models\Point::getY()
      */
     public function testAddDays()
     {
@@ -33,7 +33,7 @@ class PointTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Point::toString()
+     * @covers Godgame\Models\Point::toString()
      */
     public function testToString()
     {
