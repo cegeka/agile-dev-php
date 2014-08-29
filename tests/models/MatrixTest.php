@@ -1,6 +1,9 @@
 <?php
 
 
+use Godgame\Models\Matrix;
+use Godgame\Models\Point;
+
 class MatrixTest extends \PHPUnit_Framework_TestCase {
 
     protected $matrix;

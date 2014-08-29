@@ -22,6 +22,8 @@ class World {
         $this->size = $size;
         $this->age = $age;
 
+        $this->grid = new Matrix( $size );
+
         $this->filesystem = new Filesystem();
     }
 

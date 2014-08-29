@@ -1,6 +1,8 @@
 <?php
 
 
+use Godgame\Models\Age;
+
 class AgeTest extends \PHPUnit_Framework_TestCase {
 
     protected $age;

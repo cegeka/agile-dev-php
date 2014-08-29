@@ -1,6 +1,8 @@
 <?php
 
 
+use Godgame\Models\Point;
+
 class PointTest extends \PHPUnit_Framework_TestCase {
 
     protected $point;
