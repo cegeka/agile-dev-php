@@ -1,7 +1,7 @@
 <?php
 
 
-class Sheep extends Animal {
+class Wolf extends Animal {
 
     public function __construct(Point $location, $daysOld = 0)
     {
@@ -11,17 +11,12 @@ class Sheep extends Animal {
 
     public function render()
     {
-        return '<img src="images/sheep.png" class="animal" />';
+        return '<img src="images/wolf.png" class="animal" />';
     }
 
 
     protected function checkEvents()
     {
-        if( $this->getDaysOld() === 29 ) {
-            EventHandler::killAnimal( $this );
-            return;
-        }
-
         EventHandler::moveAnimal( $this );
     }
 

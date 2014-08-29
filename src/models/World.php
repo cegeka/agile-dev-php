@@ -58,6 +58,10 @@ class World implements Space  {
         if( $this->getDaysOld() === 19 ) {
             EventHandler::spawnSheep();
         }
+
+        if( $this->getDaysOld() === 50 ) {
+            EventHandler::spawnWolf();
+        }
     }
 
     public function addGrass(Point $location)
@@ -69,6 +73,13 @@ class World implements Space  {
     {
         $this->sheepCollection->addAnimal(
             new Sheep( $location )
+        );
+    }
+
+    public function addWolf(Point $location)
+    {
+        $this->wolfCollection->addAnimal(
+            new Wolf( $location )
         );
     }
 
@@ -135,7 +146,7 @@ class World implements Space  {
             }
 
             $this->sheepCollection->fromJson( $data->world->sheep, 'Sheep' );
-//            $this->sheepCollection->fromJson( $data->world->wolves, 'Wolf' );
+            $this->wolfCollection->fromJson( $data->world->wolves, 'Wolf' );
         } catch( Exception $e ) {
             // ...
         }

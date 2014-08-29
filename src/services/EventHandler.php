@@ -35,7 +35,12 @@ class EventHandler {
 
     public static function spawnSheep()
     {
-        $event = new SpawnSheepEvent( self::$world );
+        $event = new SpawnAnimalEvent( self::$world, 'Sheep' );
+        $event->run();
+    }
+    public static function spawnWolf()
+    {
+        $event = new SpawnAnimalEvent( self::$world, 'Wolf' );
         $event->run();
     }
 
