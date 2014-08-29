@@ -23,6 +23,13 @@ class AnimalCollection {
         }
     }
 
+    public function moveAnimals()
+    {
+        foreach( $this->animals as $animal ) {
+            EventHandler::moveAnimal( $animal );
+        }
+    }
+
     public function getAnimalAt(Point $point)
     {
         foreach( $this->animals as $animal ) {

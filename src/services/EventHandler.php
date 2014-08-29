@@ -39,4 +39,10 @@ class EventHandler {
         $event->run();
     }
 
+    public static function moveAnimal(Animal $animal)
+    {
+        $event = new MoveAnimalEvent( self::$world, $animal );
+        $event->run();
+    }
+
 }

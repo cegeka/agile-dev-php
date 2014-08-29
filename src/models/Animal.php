@@ -5,6 +5,7 @@ abstract class Animal {
 
     use Ageable;
     use Locationable;
+    use Moveable;
 
 
     /** @var Age */

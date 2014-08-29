@@ -37,6 +37,9 @@ class World implements Space  {
         $this->sheepCollection->increaseAnimalAge();
         $this->wolfCollection->increaseAnimalAge();
 
+        $this->sheepCollection->moveAnimals();
+        $this->wolfCollection->moveAnimals();
+
     }
 
     protected function checkEvents()
