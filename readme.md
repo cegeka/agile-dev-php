@@ -8,13 +8,13 @@ as an exercise that can be used by Cegeka to educate PHP developers in the best 
 # Setup
 
 The objective of this exercise is to create a small PHP web application called the 'God Game'. In this game, the user is
-a God that will create his own new world in accordance with the rules that have been set by the 'System'. Of course, it
+a God that will create his own new world in accordance with the rules that have been set by the Universe. Of course, it
 is impossible to create the world in one go. You are required to go through an iterative process and improve your
 creation every step of the way, each time making small modifications to your creation until the eco system of your world
 is stable.
 
 For these exercises, it is recommended to split up the audience into groups of 2 developers. This is preferred since
-this will allow the developers to do pair programming, which essentially a major component of agile software development
+this will allow the developers to do pair programming, which is a major component of agile software development
 within Cegeka. However, it is perfectly possible to perform these exercises individually should this be necessary. It is
 also suggested to switch pair after every exercise in order to maximize the spread of knowledge between the developers.
 
@@ -22,15 +22,15 @@ also suggested to switch pair after every exercise in order to maximize the spre
 
 # Unit tests
 
-All unit tests are located in the tests/ directory in your home folder. You can structure them in any way you want,
-although it is preferred if the directory structure matches the structure of the src/ directory for readability.
+All unit tests are located in the ``tests/`` directory in your home folder. You can structure them in any way you want,
+although it is preferred if the directory structure matches the structure of the ``src/`` directory for readability.
 
 
 ## Running unit tests
 
 In order to run the tests, you will need to download and install PHPUnit and it's assorted packages. In case you use
 composer to download the dependencies for this project (which is highly recommended), these packages will be
-downloaded for you automatically and saved in the vendor/bin directory.
+downloaded for you automatically and saved in the ``vendor/bin`` directory.
 
 In order to run the unit tests, open a new commandline terminal and navigate to the home directory of your project.
 Once there, the unit tests can be run using the following command:
@@ -57,7 +57,7 @@ to generate the HTML code coverage report for your application, you can use the 
     vendor/bin/phpunit --coverage-html logs/coverage/
 
 This will execute PHPUnit as it did in the previous example, but it will also generate the HTML coverage report and
-store it in the logs/coverage/ directory. Once generated, you can consult the report there by opening the index.html
+store it in the ``logs/coverage/`` directory. Once generated, you can consult the report there by opening the ``index.html``
 file in the specified directory.
 
 
