@@ -56,13 +56,13 @@ class World {
             array_push( $data->world->grass, $grass );
         }
 
-        $this->filesystem->write( __DIR__ . '/../../saves/' . $file, $data, $overrideExisting );
+        $this->filesystem->write( __DIR__ . '/../../../saves/' . $file, $data, $overrideExisting );
     }
 
     public function loadFromFile($file = 'world.json')
     {
         try {
-            $data = $this->filesystem->read( __DIR__ . '/../../saves/' . $file );
+            $data = $this->filesystem->read( __DIR__ . '/../../../saves/' . $file );
 
             $this->age = new Age( $data->world->age );
             $this->grid = new Matrix( $data->world->size );
