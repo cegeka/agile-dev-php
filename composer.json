@@ -11,7 +11,7 @@
     },
 
     "autoload": {
-        "psr-4": {"Godgame\\": "src/"}
+        "psr-0": {"": "src/"}
     },
 
     "minimum-stability": "stable"
