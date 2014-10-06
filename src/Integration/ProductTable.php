@@ -7,9 +7,6 @@ class ProductTable
     /** @var \PDO */
     protected $dbh;
 
-    /** @var string */
-    protected $table = 'product';
-
     public function __construct($host = Database::HOSTNAME, $data = Database::DATABASE, $user = Database::USERNAME, $pass = Database::PASSWORD)
     {
         $this->dbh = new PDO("mysql:host={$host};dbname={$data}", $user, $pass);
